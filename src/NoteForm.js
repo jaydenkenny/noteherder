@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import NoteList from './NoteList'
 import './NoteForm.css'
 
 class NoteForm extends Component{
@@ -30,14 +31,16 @@ class NoteForm extends Component{
         console.log(ev.target.value)
         ev.preventDefault()
         const note ={
-            text:this.state.note,
-        }
+            title:this.state.title,
+            body:this.state.note,
 
+        }   
     const state = {...this.state}
     state.notes.push(note)
     state.note=''
     this.setState(state,()=>console.log(this.state))
     console.log(note)
+    localStorage.setItem('notes', JSON.stringify(this.state.notes))
 }
 
 
@@ -46,28 +49,28 @@ class NoteForm extends Component{
             <div className="NoteForm">
                 <form>
                     <p>
-                        <input type="text" name="title" placeholder="Title your note"onChange={this.updateTitle} />
+                        <input type="text" name="title" placeholder="Title your note" value={this.state.title} onChange={this.updateTitle} />
                     </p>
                     <p>
                         <textarea name="body" cols="30" rows="10" 
-                        placeholder="Just start typing..." 
+                        placeholder="Just start typing..." value={this.state.note}
                         onChange={this.updateNotes}></textarea>
                     </p>
-                    <a className="note-link" href="#" onClick={this.postNotes}>
-                    <span className="note-link-text">Save</span>
-                </a>
+                    <a className="note-button" href="#" onClick={this.postNotes}>
+                        <span className="note-link-text">Save</span>
+                    </a>
                 </form>
             </div>
         )
     }
 }
 
-// function Comment(props){
-//     return(
-//         <div className="comment">
-//             <div>{props.comment.text}</div>
-//         </div>
-//     )
-// }
+function Notes(props){
+    return(
+        <div className="note">
+            <NoteList />
+        </div>
+    )
+}
 
 export default NoteForm
