@@ -1,35 +1,15 @@
-@import url("https://fonts.googleapis.com/css?family=Fauna+One|Oxygen:400,300,700");
-@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
-* {
-  box-sizing: border-box;
-}
-html {
-  font-size: 10px;
-}
-body {
-  font-size: 14px;
-  line-height: 1.42857143;
-  margin: 0;
-}
-img {
-  vertical-align: middle;
-}
-.App {
-  font-family: Oxygen, Helvetica, Arial, sans-serif; }
-h1, h2, h3, h4, h5 {
-font-family: "Fauna One";
-font-weight: 400;
-color: #008BF8; }
 .NoteList {
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
   width: 30rem;
 }
+
 @media (max-width: 800px) {
   .NoteList {
     width: 20rem;
   }
 }
+
 .NoteList h3 {
   color: #999;
   text-transform: uppercase;
@@ -39,6 +19,7 @@ color: #008BF8; }
   letter-spacing: 3px;
   margin: 20px 2rem;
 }
+
 ul#notes {
   border-top: 1px solid #eee;
   overflow-y: scroll;
@@ -49,16 +30,19 @@ ul#notes {
   width: 100%;
   color: #999;
 }
+
 ul#notes > li {
   height: 120px;
   font-size: 90%;
   cursor: pointer;
   overflow: hidden;
 }
+
 ul#notes > li,
 ul#notes > li * {
   transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
 }
+
 ul#notes li .note {
   border-top: 1px solid #eee;
   margin: 0 2rem;
