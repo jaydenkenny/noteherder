@@ -25,7 +25,7 @@ class NoteForm extends Component {
     this.setState(
       { note },
       () => this.props.saveNote(this.state.note)
-    ) 
+    )
   }
 
   handleSubmit = (ev) => {
@@ -54,7 +54,9 @@ class NoteForm extends Component {
               value={this.state.note.body}
             ></textarea>
           </p>
-          <button type="submit">🐝</button>
+          <button type="submit">
+            🐝
+          </button>
         </form>
       </div>
     )

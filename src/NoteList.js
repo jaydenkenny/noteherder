@@ -4,6 +4,12 @@ import './NoteList.css'
 import Note from './Note'
 
 const NoteList = ({ notes }) => {
+    const deleteNote=(ev)=>{
+            //ev.preventDefault()
+            const del = ev.target.closest('')
+            del.remove()
+        }
+
   return (
     <div className="NoteList">
       <h3>Notes</h3>

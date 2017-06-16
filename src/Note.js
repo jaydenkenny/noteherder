@@ -1,13 +1,9 @@
 import React from 'react'
+import './NoteForm.css'
+
 
 const Note = ({ note }) => {
 
-  deleteNote(ev){
-            ev.preventDefault()
-            const del = ev.target.closest('.justForDelete')
-            del.remove()
-        }
-        
   return (
     <li>
       <div className="note">
@@ -19,8 +15,8 @@ const Note = ({ note }) => {
             {note.body}
           </p>
         </div>
-        <button className="note-list" onClick={this.deleteNote}>
-            <span className="note-link-text">🗑️</span>
+        <button className="button" >
+            🗑️
         </button>
       </div>
     </li>
@@ -29,3 +25,4 @@ const Note = ({ note }) => {
 }
 
 export default Note
+// onClick={this.props.deleteNote()}
