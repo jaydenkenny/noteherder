@@ -3,19 +3,14 @@ import React from 'react'
 import './NoteList.css'
 import Note from './Note'
 
-const NoteList = ({ notes }) => {
-    const deleteNote=(ev)=>{
-            //ev.preventDefault()
-            const del = ev.target.closest('')
-            del.remove()
-        }
+const NoteList = (props) => {
 
   return (
     <div className="NoteList">
       <h3>Notes</h3>
       <ul id="notes">
-        { Object.keys(notes).map((noteId) => {
-          return <Note note={notes[noteId]} key={noteId} />
+        { Object.keys(props.notes).map((noteId) => {
+          return <Note note={props.notes[noteId]} key={noteId} deleteNote={props.deleteNote} />
         }) }
       </ul>
     </div>

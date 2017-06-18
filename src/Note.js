@@ -2,20 +2,25 @@ import React from 'react'
 import './NoteForm.css'
 
 
-const Note = ({ note }) => {
+const Note = (props) => {
+
+  const deleteNote = (ev) => {
+    ev.preventDefault()
+    props.deleteNote(props.note)
+  }
 
   return (
     <li>
       <div className="note">
         <div className="note-title">
-          {note.title}
+          {props.note.title}
         </div>
         <div className="note-body">
           <p>
-            {note.body}
+            {props.note.body}
           </p>
         </div>
-        <button className="button" >
+        <button type="submit" onClick={deleteNote}>
             🗑️
         </button>
       </div>
@@ -25,4 +30,4 @@ const Note = ({ note }) => {
 }
 
 export default Note
-// onClick={this.props.deleteNote()}
+//onClick={this.props.deleteNote()}
