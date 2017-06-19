@@ -10,18 +10,20 @@ class NoteForm extends Component {
       note: this.blankNote(),
     }
   }
+
+  componentWillReceiveProps = (nextProps) => {
+    const newId = nextProps.currentNoteId
+    if (newId !== this.state.note.id) {
+      this.setState({ note: nextProps.notes[newId] })
+    }
+  }
+
   blankNote = () => {
     return {
       id: null,
       title: '',
       body: '',
     }
-  }
-
-  componentWillReceiveProps(nextProps){
-      if(nextProps.currentNote){
-          this.setState({note: nextProps.currentNote})
-      }
   }
 
   handleChanges = (ev) => {
@@ -38,8 +40,8 @@ class NoteForm extends Component {
     this.setState({ note: this.blankNote() })
   }
 
-  handleRemove = (ev) =>{
-    this.props.deleteNote(this.state.note)
+  handleRemove = (ev) => {
+    this.props.removeNote(this.state.note)
   }
 
   render() {
@@ -64,11 +66,11 @@ class NoteForm extends Component {
             ></textarea>
           </p>
           <button type="submit">
-            🐝
+            Save
           </button>
-          <button type="submit" onClick={this.handleRemove}>
-            🗑️
-        </button>
+          <button onClick={this.handleRemove}>
+            <i className="fa fa-trash-o"></i>
+          </button>
         </form>
       </div>
     )
