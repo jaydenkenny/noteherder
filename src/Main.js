@@ -10,7 +10,7 @@ const Main = (props) => {
     <div className="Main">
       <Sidebar />
       <NoteList notes={props.notes} deleteNote = {props.deleteNote} openNote = {props.openNote}/>
-      <NoteForm saveNote={props.saveNote} currentNote={props.currentNote}/>
+      <NoteForm {...props}/>
     </div>
   )
 }

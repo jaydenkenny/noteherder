@@ -19,8 +19,7 @@ class App extends Component {
 
   deleteNote = (note) => {
     const notes = {...this.state.notes}
-    delete notes[note.id]
-    
+    notes[note.id] = null
     this.setState({ notes })
     }
   
@@ -42,7 +41,11 @@ class App extends Component {
   }
 
   signedOut = () =>{
-    auth.signOut().then(this.setState({uid: null}))
+    auth.signOut().then(
+      () =>{
+      base.removeBinding(this.ref)
+      this.setState({ notes:{} })
+    })
   }
 
   componentWillMount(){
@@ -56,7 +59,7 @@ class App extends Component {
   }
 
   syncNotes=()=>{
-    base.syncState(
+    this.ref = base.syncState(
       `${this.state.uid}/notes`,
       {
         context: this,
@@ -65,15 +68,16 @@ class App extends Component {
 
     )
   }
-  // openNote= (currentNote) =>{
-  //   this.setState({currentNote}, ()=>{console.log(currentNote)})
-  // }
 
   renderMain = () =>{
+    const actions = {
+      saveNote: this.saveNote,
+      deleteNote: this.deleteNote,
+    }
     return (
       <div>
         <SignOut signOut ={this.signedOut}/>
-        <Main notes={this.state.notes} currentNote={this.state.currentNote} saveNote={this.saveNote} deleteNote={this.deleteNote} openNote={this.openNote} />
+        <Main notes={this.state.notes} {...actions} />
       </div>
     )
   }

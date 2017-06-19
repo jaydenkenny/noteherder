@@ -38,6 +38,10 @@ class NoteForm extends Component {
     this.setState({ note: this.blankNote() })
   }
 
+  handleRemove = (ev) =>{
+    this.props.deleteNote(this.state.note)
+  }
+
   render() {
     return (
       <div className="NoteForm">
@@ -62,6 +66,9 @@ class NoteForm extends Component {
           <button type="submit">
             🐝
           </button>
+          <button type="submit" onClick={this.handleRemove}>
+            🗑️
+        </button>
         </form>
       </div>
     )

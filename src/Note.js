@@ -4,10 +4,10 @@ import './NoteForm.css'
 
 const Note = (props) => {
 
-  const deleteNote = (ev) => {
-    ev.preventDefault()
-    props.deleteNote(props.note)
-  }
+  // const deleteNote = (ev) => {
+  //   ev.preventDefault()
+  //   props.deleteNote(props.note)
+  // }
 
   const openNote = (ev) => {
     ev.preventDefault()
@@ -25,9 +25,9 @@ const Note = (props) => {
             {props.note.body}
           </p>
         </div>
-        <button type="submit" onClick={deleteNote}>
+        {/*<button type="submit" onClick={deleteNote}>
             🗑️
-        </button>
+        </button>*/}
       </div>
     </li>
   )
