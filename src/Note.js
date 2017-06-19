@@ -13,7 +13,7 @@ const Note = (props) => {
     ev.preventDefault()
     props.openNote(props.note)
   }
-  
+
   return (
     <li onClick={openNote}>
       <div className="note">

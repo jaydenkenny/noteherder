@@ -9,6 +9,7 @@ class App extends Component {
 
     this.state = {
       notes: {},
+      currentNote:{},
     }
   }
 
@@ -25,17 +26,17 @@ class App extends Component {
     }
     const notes = {...this.state.notes}
     notes[note.id] = note
-    this.setState({ notes })
+    this.setState({ notes, currentNote:note })
   }
 
-  openNote= (note) =>{
-    console.log("it's working!")
+  openNote= (currentNote) =>{
+    this.setState({currentNote}, ()=>{console.log(currentNote)})
   }
 
   render() {
     return (
       <div className="App">
-        <Main notes={this.state.notes} saveNote={this.saveNote} deleteNote={this.deleteNote} openNote={this.openNote} />
+        <Main notes={this.state.notes} currentNote={this.state.currentNote} saveNote={this.saveNote} deleteNote={this.deleteNote} openNote={this.openNote} />
       </div>
     );
   }
