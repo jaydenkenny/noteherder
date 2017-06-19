@@ -9,8 +9,13 @@ const Note = (props) => {
     props.deleteNote(props.note)
   }
 
+  const openNote = (ev) => {
+    ev.preventDefault()
+    props.openNote(props.note)
+  }
+  
   return (
-    <li>
+    <li onClick={openNote}>
       <div className="note">
         <div className="note-title">
           {props.note.title}

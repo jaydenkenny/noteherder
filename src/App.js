@@ -28,10 +28,14 @@ class App extends Component {
     this.setState({ notes })
   }
 
+  openNote= (note) =>{
+    console.log("it's working!")
+  }
+
   render() {
     return (
       <div className="App">
-        <Main notes={this.state.notes} saveNote={this.saveNote} deleteNote={this.deleteNote} />
+        <Main notes={this.state.notes} saveNote={this.saveNote} deleteNote={this.deleteNote} openNote={this.openNote} />
       </div>
     );
   }
