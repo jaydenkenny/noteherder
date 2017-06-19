@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 import './App.css';
 import Main from './Main'
+import base from './base'
+import SignIn from './SignIn'
+import SignOut from './SignOut'
 
 class App extends Component {
   constructor() {
@@ -10,6 +13,7 @@ class App extends Component {
     this.state = {
       notes: {},
       currentNote:{},
+      uid: null,
     }
   }
 
@@ -29,14 +33,45 @@ class App extends Component {
     this.setState({ notes, currentNote:note })
   }
 
-  openNote= (currentNote) =>{
-    this.setState({currentNote}, ()=>{console.log(currentNote)})
+  signedIn = () =>{
+    return this.state.uid
+  }
+
+  authHandler = (user) =>{
+    this.setState({ uid: user.uid })
+  }
+
+  signedOut = () =>{
+    this.setState({uid: null})
+  }
+
+  componentWillMount(){
+    base.syncState(
+      'notes',
+      {
+        context: this,
+        state:'notes',
+      }
+
+    )
+  }
+  // openNote= (currentNote) =>{
+  //   this.setState({currentNote}, ()=>{console.log(currentNote)})
+  // }
+
+  renderMain = () =>{
+    return (
+      <div>
+        <SignOut signOut ={this.signedOut}/>
+        <Main notes={this.state.notes} currentNote={this.state.currentNote} saveNote={this.saveNote} deleteNote={this.deleteNote} openNote={this.openNote} />
+      </div>
+    )
   }
 
   render() {
     return (
       <div className="App">
-        <Main notes={this.state.notes} currentNote={this.state.currentNote} saveNote={this.saveNote} deleteNote={this.deleteNote} openNote={this.openNote} />
+        {this.signedIn() ? this.renderMain() : <SignIn authHandler={this.authHandler} />}
       </div>
     );
   }
