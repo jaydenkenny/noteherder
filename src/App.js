@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './App.css';
 import Main from './Main'
-import base from './base'
+import base, {auth} from './base'
 import SignIn from './SignIn'
 import SignOut from './SignOut'
 
@@ -38,19 +38,23 @@ class App extends Component {
   }
 
   authHandler = (user) =>{
-    this.setState({ uid: user.uid })
+    this.setState({ uid: user.uid }, this.syncNotes)
   }
 
   signedOut = () =>{
-    this.setState({uid: null})
+    auth.signOut().then(this.setState({uid: null}))
   }
 
   componentWillMount(){
+    
+  }
+
+  syncNotes=()=>{
     base.syncState(
-      'notes',
+      `${this.state.uid}/notes`,
       {
         context: this,
-        state:'notes',
+        state: 'notes',
       }
 
     )
