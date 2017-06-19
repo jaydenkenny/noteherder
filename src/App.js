@@ -57,9 +57,17 @@ class App extends Component {
     this.setState({ notes })
   }
   
-  // newNote=()=>{
-    
-  // }
+  newNote=()=>{
+    const note ={
+      id: `note-${Date.now()}`,
+      body: '',
+      title: '',
+    }
+
+    const notes = {...this.state.notes}
+    notes[note.id] = note
+    //this.setState(currentNoteId)
+  }
 
   signedIn = () => {
     return this.state.uid
