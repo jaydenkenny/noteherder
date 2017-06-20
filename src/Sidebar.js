@@ -7,6 +7,7 @@ import './Sidebar.css'
 
 const Sidebar = ({ newNote }) => {
     const handleClick = (ev) =>{
+        ev.preventDefault()
         
     }
         return(
