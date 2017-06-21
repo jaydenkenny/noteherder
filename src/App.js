@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Route, Switch, Redirect} from 'react-router-dom'
 
 import './App.css'
 import Main from './Main'
@@ -38,6 +39,12 @@ class App extends Component {
         state: 'notes',
       }
     )
+  }
+
+  stopSyncing=()=>{
+    if(this.ref){
+      base.removeBinding(this.ref)
+    }
   }
 
   blankNote = () => {
@@ -85,8 +92,7 @@ class App extends Component {
       .signOut()
       .then(
         () => {
-          // stop syncing with Firebase
-          base.removeBinding(this.ref)
+          this.stopSyncing()
           this.setState({ notes: {}, currentNote:this.blankNote() })
         }
       )
@@ -96,7 +102,8 @@ class App extends Component {
     this.setState({ currentNote: note })
   }
 
-  renderMain = () => {
+
+  render() {
     const actions = {
       saveNote: this.saveNote,
       removeNote: this.removeNote,
@@ -110,19 +117,21 @@ class App extends Component {
     }
 
     return (
-      <div>
-        <Main
-          {...noteData}
-          {...actions}
-        />
-      </div>
-    )
-  }
-
-  render() {
-    return (
       <div className="App">
-        { this.signedIn() ? this.renderMain() : <SignIn /> }
+        <Switch>
+          <Route path="/notes" render={() => (
+            this.signedIn()
+              ? <Main
+                {...noteData}
+                {...actions}
+              />
+              :<Redirect to="/sign-in"/>
+          )} />
+          <Route path="/sign-in" component={SignIn} />
+          <Route render={() => <Redirect to="/notes" />} />
+        </Switch>
+
+        {/*{ this.signedIn() ? this.renderMain() : <SignIn /> }*/}
       </div>
     )
   }
