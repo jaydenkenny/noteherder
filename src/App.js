@@ -18,6 +18,7 @@ class App extends Component {
   }
 
   componentWillMount() {
+    this.getUserFromLocalStorage()
     auth.onAuthStateChanged(
       (user) => {
         if (user) {
@@ -29,6 +30,12 @@ class App extends Component {
         }
       }
     )
+  }
+
+  getUserFromLocalStorage(){
+    const uid = localStorage.getItem('uid')
+    if (!uid) return
+    this.setState({ uid })
   }
 
   syncNotes = () => {
@@ -81,6 +88,7 @@ class App extends Component {
   }
 
   authHandler = (user) => {
+    localStorage.setItem('uid', user.uid)
     this.setState(
       { uid: user.uid },
       this.syncNotes
@@ -103,7 +111,7 @@ class App extends Component {
   }
 
 
-  render() {
+ render() {
     const actions = {
       saveNote: this.saveNote,
       removeNote: this.removeNote,
@@ -122,16 +130,19 @@ class App extends Component {
           <Route path="/notes" render={() => (
             this.signedIn()
               ? <Main
-                {...noteData}
-                {...actions}
-              />
-              :<Redirect to="/sign-in"/>
+                  {...noteData}
+                  {...actions}
+                />
+              : <Redirect to="/sign-in" />
           )} />
-          <Route path="/sign-in" component={SignIn} />
+          <Route path="/sign-in" render={() => (
+            !this.signedIn()
+              ? <SignIn />
+              : <Redirect to="/notes" />
+          )} />
+
           <Route render={() => <Redirect to="/notes" />} />
         </Switch>
-
-        {/*{ this.signedIn() ? this.renderMain() : <SignIn /> }*/}
       </div>
     )
   }
