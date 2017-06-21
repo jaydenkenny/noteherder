@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Route, Switch, Redirect} from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 import './App.css'
 import Main from './Main'
@@ -32,7 +32,7 @@ class App extends Component {
     )
   }
 
-  getUserFromLocalStorage(){
+  getUserFromLocalStorage() {
     const uid = localStorage.getItem('uid')
     if (!uid) return
     this.setState({ uid })
@@ -48,8 +48,8 @@ class App extends Component {
     )
   }
 
-  stopSyncing=()=>{
-    if(this.ref){
+  stopSyncing = () => {
+    if (this.ref) {
       base.removeBinding(this.ref)
     }
   }
@@ -63,12 +63,20 @@ class App extends Component {
   }
 
   saveNote = (note) => {
+    let shouldRedirect = false
     if (!note.id) {
       note.id = `note-${Date.now()}`
+      shouldRedirect = true
     }
     const notes = {...this.state.notes}
     notes[note.id] = note
-    this.setState({ notes, currentNote: note, })
+    this.setState({
+      notes,
+      currentNote: note,
+    })
+    if (shouldRedirect) {
+      this.props.history.push(`/notes/${note.id}`)
+    }
   }
 
   removeNote = (note) => {
@@ -76,11 +84,7 @@ class App extends Component {
     notes[note.id] = null
     this.resetCurrentNote()
     this.setState({ notes })
-  }
-  
-
-  resetCurrentNote = () =>{
-    this.setCurrentNote(this.blankNote())
+    this.props.history.push('/notes')
   }
 
   signedIn = () => {
@@ -101,7 +105,10 @@ class App extends Component {
       .then(
         () => {
           this.stopSyncing()
-          this.setState({ notes: {}, currentNote:this.blankNote() })
+          this.setState({
+            notes: {},
+            currentNote: this.blankNote()
+          })
         }
       )
   }
@@ -110,8 +117,11 @@ class App extends Component {
     this.setState({ currentNote: note })
   }
 
+  resetCurrentNote = () => {
+    this.setCurrentNote(this.blankNote())
+  }
 
- render() {
+  render() {
     const actions = {
       saveNote: this.saveNote,
       removeNote: this.removeNote,
