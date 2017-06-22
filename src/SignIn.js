@@ -21,10 +21,10 @@ const SignIn = () =>{
                     <i>We'd like to Welcome you Noteherder</i>
                 </p>
             </div>
-            <img src="https://fleep.io/blog/wp-content/uploads/2014/07/github_icon.png" className="SignIn" onClick={authenticate} />
+            <img src="https://fleep.io/blog/wp-content/uploads/2014/07/github_icon.png" className="SignIn" onClick={authenticate} alt="github logo"/>
                     {/*Github
                 </button>*/}
-                <img src="http://centerlyne.com/wp-content/uploads/2016/07/logo-facebook.png" className="SignIn2" onClick={authenticateFacebook} />
+                <img src="http://centerlyne.com/wp-content/uploads/2016/07/logo-facebook.png" className="SignIn2" onClick={authenticateFacebook} alt="facebook logo" />
                     {/*Facebook
                 </button>*/}
         </div>
