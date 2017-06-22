@@ -1,15 +1,44 @@
+body{
+  background-image:url('https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/GWHP8O7K1A.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: -60px;
+
+}
+.welcome{
+  color:white !important;
+  margin:20px 110px;
+}
+.pls{
+  border:1px solid #fff;
+  border-width:5px;
+  padding: 50px 45px;
+  box-shadow: outset 0 0 10px 0 #666;
+  width: 350px;
+  height:350px;
+  margin-left:100px;
+  margin-top:25px;
+  color:#fff;
+  padding: 100px 50px;
+  background: rgba(230, 230, 255,.25);
+
+}
 .SignIn {
-  background-color: #008BF8;
-  border: 0;
-  border-radius: 5px;
-  color: white;
-  display: block;
-  margin: 10px auto;
-  padding: 20px;
+  width:100px;
+  height:100px;
+  display: inline-block;
+  margin-left:110px;
   -webkit-transition: background 0.2s;
   -o-transition: background 0.2s;
   transition: background 0.2s;
-  font-family: 'helvetica neue', sans-serif;
-  font-size: 20px;
-  font-weight: 200;
+}
+
+.SignIn2 {
+  width:125px;
+  height:125px;
+  display: inline-block;
+  margin-left:125px;
+  -webkit-transition: 1s;
+  -o-transition: 1s;
+  transition: 1s;
 }
