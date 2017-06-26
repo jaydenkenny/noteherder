@@ -3,6 +3,7 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: -60px;
+  height:100vh;
 
 }
 .welcome{
